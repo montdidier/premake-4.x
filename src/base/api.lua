@@ -162,6 +162,12 @@
 			}
 		},
 
+		frameworkdirs =
+		{
+			kind = "dirlist",
+			scope = "config",
+		},
+
 		imagepath =
 		{
 			kind = "path",

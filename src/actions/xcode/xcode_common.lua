@@ -32,6 +32,7 @@
 			[".nib"] = "Resources",
 			[".xib"] = "Resources",
 			[".icns"] = "Resources",
+			[".S"] = "Sources",
 			[".bmp"] = "Resources",
 			[".wav"] = "Resources",
 		}
@@ -74,6 +75,7 @@
 			[".cpp"]       = "sourcecode.cpp.cpp",
 			[".css"]       = "text.css",
 			[".cxx"]       = "sourcecode.cpp.cpp",
+			[".S"]         = "sourcecode.asm.asm",
 			[".framework"] = "wrapper.framework",
 			[".gif"]       = "image.gif",
 			[".h"]         = "sourcecode.c.h",
@@ -770,8 +772,14 @@
 			Universal32 = "$(ARCHS_STANDARD_32_BIT)",
 			Universal64 = "$(ARCHS_STANDARD_64_BIT)",
 			Universal = "$(ARCHS_STANDARD_32_64_BIT)",
+			iOS = "$(ARCHS_UNIVERSAL_IPHONE_OS)",
 		}
 		_p(4,'ARCHS = "%s";', archs[cfg.platform])
+
+		if cfg.platform == "iOS" then
+			_p(4,'SDKROOT = %s;', "iphoneos")
+			_p(4,'CODE_SIGN_IDENTITY = "%s";', "iPhone Developer")
+		end
 		
 		local targetdir = path.getdirectory(cfg.buildtarget.bundlepath)
 		if targetdir ~= "." then
@@ -828,6 +836,7 @@
 
 		xcode.printlist(cfg.includedirs, 'HEADER_SEARCH_PATHS')
 		xcode.printlist(cfg.libdirs, 'LIBRARY_SEARCH_PATHS')
+		xcode.printlist(cfg.frameworkdirs, 'FRAMEWORK_SEARCH_PATHS')
 		
 		_p(4,'OBJROOT = "%s";', cfg.objectsdir)
 
@@ -906,7 +915,7 @@
 			end
 			_p(3,');')
 			_p(3,'defaultConfigurationIsVisible = 0;')
-			_p(3,'defaultConfigurationName = "%s";', xcode.getconfigname(tr.configs[1]))
+			_p(3,'defaultConfigurationName = "%s";', xcode.getconfigname(premake.getconfig(tr.project, tr.project.configurations[1], sln.platform)))
 			_p(2,'};')
 		end
 		_p(2,'1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "%s" */ = {', tr.name)
@@ -917,7 +926,7 @@
 		end
 		_p(3,');')
 		_p(3,'defaultConfigurationIsVisible = 0;')
-		_p(3,'defaultConfigurationName = "%s";', xcode.getconfigname(tr.configs[1]))
+		_p(3,'defaultConfigurationName = "%s";', xcode.getconfigname(premake.getconfig(tr.project, tr.project.configurations[1], sln.platform)))
 		_p(2,'};')
 		_p('/* End XCConfigurationList section */')
 		_p('')

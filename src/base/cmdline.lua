@@ -71,6 +71,7 @@
 			{ "universal",   "Mac OS X Universal, 32- and 64-bit" },
 			{ "universal32", "Mac OS X Universal, 32-bit only" },
 			{ "universal64", "Mac OS X Universal, 64-bit only" },
+			{ "ios",         "iOS" },
 			{ "ps3",         "Playstation 3 (experimental)" },
 			{ "xbox360",     "Xbox 360 (experimental)" },
 		}

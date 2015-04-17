@@ -40,6 +40,7 @@
 			end
 			
 			sln.platforms = platforms
+			sln.platform = platform
 		end
 		
 		return true

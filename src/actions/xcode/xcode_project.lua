@@ -21,6 +21,7 @@
 		local tr = premake.project.buildsourcetree(prj)
 		
 		-- create a list of build configurations and assign IDs
+		tr.default_platform = "iOS"
 		tr.configs = {}
 		for _, cfgname in ipairs(prj.solution.configurations) do
 			for _, platform in ipairs(prj.solution.xcode.platforms) do
